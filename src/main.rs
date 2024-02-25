@@ -3,6 +3,7 @@ use once_cell::sync::Lazy;
 use rand::distributions::{Alphanumeric, DistString};
 use token::Keys;
 
+mod error;
 mod token;
 
 static KEYS: Lazy<Keys> = Lazy::new(|| {
