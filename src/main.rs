@@ -5,6 +5,7 @@ use token::Keys;
 
 mod claims;
 mod error;
+mod routes;
 mod token;
 
 static KEYS: Lazy<Keys> = Lazy::new(|| {

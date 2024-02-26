@@ -10,8 +10,8 @@ use crate::{error::AuthError, KEYS};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
-    username: String,
-    exp: usize,
+    pub username: String,
+    pub exp: usize,
 }
 
 #[async_trait]
