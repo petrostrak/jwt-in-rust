@@ -1,6 +1,10 @@
-use axum::{routing::get, Router};
+use axum::{
+    routing::{get, post},
+    Router,
+};
 use once_cell::sync::Lazy;
 use rand::distributions::{Alphanumeric, DistString};
+use routes::{authorize, protected};
 use token::Keys;
 
 mod claims;
@@ -19,7 +23,10 @@ async fn hello_world() -> &'static str {
 
 #[shuttle_runtime::main]
 async fn main() -> shuttle_axum::ShuttleAxum {
-    let router = Router::new().route("/", get(hello_world));
+    let router = Router::new()
+        .route("/", get(hello_world))
+        .route("/protected", get(protected))
+        .route("/login", post(authorize));
 
     Ok(router.into())
 }

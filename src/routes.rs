@@ -26,7 +26,7 @@ struct AuthPayload {
     client_secret: String,
 }
 
-async fn authorize(Json(payload): Json<AuthPayload>) -> Result<Json<AuthBody>, AuthError> {
+pub async fn authorize(Json(payload): Json<AuthPayload>) -> Result<Json<AuthBody>, AuthError> {
     // Check if the user sent the credentials
     if payload.client_id.is_empty() || payload.client_secret.is_empty() {
         return Err(AuthError::MissingCredentials);
@@ -51,6 +51,6 @@ async fn authorize(Json(payload): Json<AuthPayload>) -> Result<Json<AuthBody>, A
     Ok(Json(AuthBody::new(token)))
 }
 
-async fn protected(claims: Claims) -> String {
+pub async fn protected(claims: Claims) -> String {
     format!("Welcome to the protected area, {}!", claims.username)
 }
