@@ -50,3 +50,7 @@ async fn authorize(Json(payload): Json<AuthPayload>) -> Result<Json<AuthBody>, A
 
     Ok(Json(AuthBody::new(token)))
 }
+
+async fn protected(claims: Claims) -> String {
+    format!("Welcome to the protected area, {}!", claims.username)
+}
