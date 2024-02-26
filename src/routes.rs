@@ -1,12 +1,12 @@
 use axum::Json;
 use chrono::Utc;
 use jsonwebtoken::{encode, Header};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::{claims::Claims, error::AuthError, KEYS};
 
 #[derive(Debug, Serialize)]
-struct AuthBody {
+pub struct AuthBody {
     access_token: String,
     token_type: String,
 }
@@ -20,8 +20,8 @@ impl AuthBody {
     }
 }
 
-#[derive(Debug, Serialize)]
-struct AuthPayload {
+#[derive(Debug, Deserialize)]
+pub struct AuthPayload {
     client_id: String,
     client_secret: String,
 }
